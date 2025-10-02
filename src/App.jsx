@@ -1,36 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import StatisticCard from './components/StatisticCard'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [coins, setCoins] = useState([])
+
+  useEffect(()=> {
+    fetch('https://api.binance.com/api/v3/ticker/24hr').then(r => r.json()).then(icons => icons.filter(i => i.symbol.endsWith('USDT'))).then(setCoins)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>hokkabaz served</h1>
-      <h1>yes yes no</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-          yes yes no
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='grid grid-cols-4 gap-4 p-5'>
+      {coins.map((coin, index) => <StatisticCard index={index} key={coin.symbol} coin={coin} />)}
+    </div>
   )
 }
 

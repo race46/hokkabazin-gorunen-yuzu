@@ -1,6 +1,6 @@
 function StatisticCard({coin, index}){
   return (
-    <div className="bg-gray-950 h-38  rounded-2xl overflow-hidden">
+    <div className="bg-gray-950 h-38  rounded-2xl overflow-hidden outline-1 outline-neutral-800">
       <div className='flex items-center h-2/3 pl-2'>
         <a href="https://react.dev" target="_blank">
           <img src={`https://raw.githubusercontent.com/spothq/cryptocurrency-icons/refs/heads/master/128/icon/${coin?.symbol?.slice(0,-4).toLowerCase()}.png`} className="logo react size-14" alt="React logo" />

@@ -4,16 +4,26 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import StatisticCard from './components/StatisticCard'
 
+async function fetchCoins(){
+  const result = await fetch('https://api.binance.com/api/v3/ticker/24hr')
+    .then(r => r.json())
+    .then(coins => coins.filter(i => i.symbol.endsWith('USDT')))
+
+  // result.sort((i,j) => (parseFloat(i.quoteVolume) - parseFloat(j.quoteVolume)));
+
+  return result;
+}
+
 function App() {
   const [coins, setCoins] = useState([])
 
   useEffect(()=> {
-    fetch('https://api.binance.com/api/v3/ticker/24hr').then(r => r.json()).then(icons => icons.filter(i => i.symbol.endsWith('USDT'))).then(setCoins)
+    fetchCoins().then(setCoins)
   }, [])
 
   return (
-    <div className='grid grid-cols-4 gap-4 p-5'>
-      {coins.map((coin, index) => <StatisticCard index={index} key={coin.symbol} coin={coin} />)}
+    <div className='grid 2xl:grid-cols-4 xl:grid-cols-3 gap-4 md:p-5 p-1 pt-4'>
+      {coins.map((coin, index) => <StatisticCard index={index + 1} key={coin.symbol} coin={coin} />)}
     </div>
   )
 }

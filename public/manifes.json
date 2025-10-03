@@ -3,7 +3,7 @@
   "name": "My React Application",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/refs/heads/master/128/icon/btc.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
@@ -14,7 +14,7 @@
     }
   ],
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
